@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vx - AI Assistant & Cybersecurity Check</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#111827',
+                        accentBlue: '#3b82f6',
+                        accentPurple: '#8b5cf6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/85 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-black bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Vx</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">AI & Security</span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#features" class="text-gray-400 hover:text-white transition">Features</a>
+                <a href="#security" class="text-gray-400 hover:text-white transition">Cybersecurity</a>
+                <a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a>
+            </nav>
+            <div>
+                <a href="#pricing" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white px-4 py-2 rounded-xl font-medium text-sm transition shadow-lg shadow-blue-500/20">Get Vx</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm mb-6">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Next-Gen AI & Advanced Security Checker</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+            Meet <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Vx</span>, Your Smart Security Assistant
+        </h1>
+        <p class="max-w-2xl mx-auto text-gray-400 text-lg mb-10">
+            Powered by advanced artificial intelligence to analyze web applications, detect vulnerabilities, and secure your digital assets effortlessly.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#security" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 rounded-xl transition shadow-lg shadow-blue-600/30">
+                Explore Security Features
+            </a>
+            <a href="#pricing" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold px-8 py-3 rounded-xl border border-gray-700 transition">
+                View Pricing Plans
+            </a>
+        </div>
+    </section>
+
+    <!-- Vx Cybersecurity Check Section (The 5 Core Options) -->
+    <section id="security" class="py-20 bg-gray-900/50 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Vx Cybersecurity Check Option 🔥</h2>
+                <p class="text-gray-400">
+                    زیرەکی دەستکردی ڤی ئێکس ئێستا ئۆپشنی سایبەر سکیورتی هەەیە تەنها لینکەکەی بۆ ئەنێری لەگەڵ چێک. هەموو وردەکاریەک لەسەر وێبەکە دەرئەهێنێ.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Option 1 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-route"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">1. Admin Routes & Mapping</h3>
+                    <p class="text-gray-400 text-sm">
+                        گەڕان بۆ ڕاوتەکان وەکو ئەدمین پەنڵ, پەڕە شاراوەکان و دایرێکتۆرییەکان بە خێراییەکی بەرز و بەکارهێنانی Nmap بۆ دۆزینەوەی پۆرت و خزمەتگوزارییەکان.
+                    </p>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">2. Rate Limiter Check</h3>
+                    <p class="text-gray-400 text-sm">
+                        پشکنینی سیستەمی ڕەیت لەمیتەر (Rate Limiter) بۆ زانینی ئایا ئەپڵیکەیشنەکە بەرگری هەیە لە هێرشەکانی Brute Force و DDoS یان نا.
+                    </p>
+                </div>
+
+                <!-- Option 3 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-file-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">3. Env & Document Finder</h3>
+                    <p class="text-gray-400 text-sm">
+                        گەڕان بەدوای فایلی هەستیاری ژینگەگەری (Environment Files مثل .env) و دۆکیۆمێنت و کۆدی سەرچاوەی کراوەی نیازمەند بە پاراستن.
+                    </p>
+                </div>
+
+                <!-- Option 4 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">4. SSL Vulnerability Check</h3>
+                    <p class="text-gray-400 text-sm">
+                        دۆزینەوە و دیاریکردنی هەموو کەلێن و لاوازییەکانی په‌یوەست بە بڕوانامەی SSL/TLS و ئاراستەکردنی پارێزراو (HTTPS Security).
+                    </p>
+                </div>
+
+                <!-- Option 5 -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 transition">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">5. Database Injection Scanner</h3>
+                    <p class="text-gray-400 text-sm">
+                        پشکنینی پێشکەوتوو بۆ دۆزینەوەی لاوازییەکانی SQL Injection و هێرشەکانی تری تێکدانی داتابەیس پێش ئەوەی هێرشکەر دەستی پێبگات.
+                    </p>
+                </div>
+
+                <!-- Extra / Ongoing Feature -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 hover:border-green-500/50 transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Continuous Updates</h3>
+                        <p class="text-gray-400 text-sm">
+                            کاری لەسەر ئەکرێ حالیەن و بە دەیان جار باشتر ئەکرێ بۆ زیادکردنی تایبەتمەندی نوێ و خێرایی زیاتر!
+                        </p>
+                    </div>
+                    <span class="inline-block mt-4 text-xs text-green-400 font-semibold">Active Development 🚀</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Buy Section -->
+    <section id="pricing" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Pricing & Plans</h2>
+            <p class="text-gray-400">Choose the best plan to access Vx AI assistant and security scanner.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Free / Basic Tier -->
+            <div class="bg-cardBg border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Standard AI</h3>
+                    <p class="text-gray-400 text-sm mb-6">For general usage and basic inquiries.</p>
+                    <div class="text-3xl font-black mb-6">Free <span class="text-sm font-normal text-gray-400">/ basic</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li><i class="fa-solid fa-check text-blue-500 mr-2"></i> Standard AI prompts</li>
+                        <li><i class="fa-solid fa-check text-blue-500 mr-2"></i> Basic web assistance</li>
+                        <li><i class="fa-solid fa-xmark text-gray-600 mr-2"></i> Advanced Cybersecurity Check</li>
+                    </ul>
+                </div>
+                <button class="w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 rounded-xl transition">Current Plan</button>
+            </div>
+
+            <!-- Pro / Security Tier -->
+            <div class="bg-gradient-to-b from-blue-950/40 to-cardBg border border-blue-500/50 rounded-2xl p-8 flex flex-col justify-between relative shadow-xl shadow-blue-900/20">
+                <div class="absolute -top-3 right-8 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">Popular</div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Vx Pro + Security Checker</h3>
+                    <p class="text-gray-400 text-sm mb-6">Full access to AI and the 5 security check options.</p>
+                    <div class="text-3xl font-black mb-6">VIP <span class="text-sm font-normal text-gray-400">/ access</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li><i class="fa-solid fa-check text-blue-500 mr-2"></i> Full AI Assistant Access</li>
+                        <li><i class="fa-solid fa-check text-blue-500 mr-2"></i> Admin Routes & Nmap Scanning</li>
+                        <li><i class="fa-solid fa-check text-blue-500 mr-2"></i> Rate Limiter & SSL Vulnerability Check</li>
+                        <li><i class="fa-solid fa-check text-blue-500 mr-2"></i> Env Finder & SQL Injection Scanner</li>
+                    </ul>
+                </div>
+                <button onclick="alert('Redirecting to checkout...')" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-blue-500/20">Get Access Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 text-center text-sm text-gray-500">
+        <p>&copy; 2026 Rawandios & Vx. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
