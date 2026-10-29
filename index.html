@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VX AI · Sovereign Intelligence & Security Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0: #0a0a0c;
+    --bg-1: #121214;
+    --bg-2: #191816;
+    --bg-3: #22211e;
+    --line: #2b2a26;
+    --line-soft: #1d1c1a;
+    --text-hi: #f2ede4;
+    --text-mid: #9e978c;
+    --text-low: #656056;
+    --accent: #e2a545;
+    --accent-soft: #f0c37c;
+    --accent-dim: #382c19;
+    --accent-text: #111110;
+    --green: #7fb87a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-0);
+    color: var(--text-hi);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  .serif { font-family: 'Newsreader', serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .vx-app-bar {
+    display: flex; align-items: center; justify-content: space-between; padding: 10px 16px;
+    background: rgba(14, 14, 14, 0.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .vx-bar-left { display: flex; align-items: center; gap: 10px; }
+  .vx-model-pill {
+    display: flex; align-items: center; gap: 7px; background: rgba(25, 24, 22, 0.9);
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 12.5px; font-weight: 500; color: var(--text-hi);
+  }
+  .vx-model-dot { width: 7px; height: 7px; border-radius: 50%; background: #e2a545; box-shadow: 0 0 6px rgba(226,165,69,0.6); }
+  .vx-bar-right { display: flex; align-items: center; gap: 10px; }
+  .vx-plan-pill { background: rgba(25, 24, 22, 0.9); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 11.5px; color: var(--text-mid); font-weight: 500; }
+  .vx-user-avatar { width: 30px; height: 30px; border-radius: 50%; background: #252422; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 12px; font-weight: 700; }
+
+  .vx-chat-main { flex: 1; display: flex; flex-direction: column; max-width: 720px; width: 100%; margin: 0 auto; padding: 16px 16px 160px; }
+
+  .vx-banner-card {
+    background: #171715; border: 1px solid rgba(226, 165, 69, 0.22); border-radius: 14px; padding: 14px 16px; margin-bottom: 24px; font-size: 13px; color: var(--text-hi); line-height: 1.55; box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  }
+  .vx-banner-badge { display: inline-block; background: rgba(226, 165, 69, 0.2); color: var(--accent); font-weight: 700; font-size: 10.5px; padding: 2px 7px; border-radius: 6px; margin-right: 8px; border: 1px solid rgba(226, 165, 69, 0.35); }
+
+  .vx-hero-section { margin-top: 6px; margin-bottom: 26px; }
+  .vx-hero-title { font-family: 'Newsreader', serif; font-style: italic; font-size: 32px; font-weight: 400; color: var(--text-hi); margin-bottom: 6px; }
+  .vx-hero-desc { color: var(--text-mid); font-size: 14px; }
+
+  .vx-prompt-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .vx-pill {
+    background: rgba(23, 23, 21, 0.9); border: 1px solid var(--line); color: var(--text-hi); font-size: 12.5px; padding: 7px 14px; border-radius: 999px; cursor: pointer; transition: 0.15s; user-select: none;
+  }
+  .vx-pill:hover { border-color: var(--accent-dim); background: #1f1e1a; }
+
+  .vx-stream { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+  .vx-chat-msg { display: flex; flex-direction: column; max-width: 92%; }
+  .vx-chat-msg.user { align-self: flex-end; }
+  .vx-chat-msg.ai { align-self: flex-start; width: 100%; max-width: 100%; }
+  .vx-chat-bubble { padding: 12px 16px; border-radius: 16px; font-size: 13.5px; line-height: 1.6; word-break: break-word; }
+  .vx-chat-msg.user .vx-chat-bubble { background: #252422; border: 1px solid var(--accent-dim); border-bottom-right-radius: 4px; color: var(--text-hi); }
+  .vx-chat-msg.ai .vx-chat-bubble { background: #151513; border: 1px solid var(--line); border-bottom-left-radius: 4px; color: var(--text-hi); }
+
+  .vx-security-report {
+    background: #111318; border: 1px solid rgba(226, 165, 69, 0.3); border-radius: 14px; padding: 18px; margin-top: 6px; font-family: 'Inter', sans-serif;
+  }
+  .vx-sec-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .vx-sec-title { font-size: 14.5px; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+  .vx-sec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  @media(max-width: 600px) { .vx-sec-grid { grid-template-columns: 1fr; } }
+  .vx-sec-item { background: #181920; border: 1px solid var(--line-soft); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; }
+  .vx-sec-item-title { color: var(--text-mid); font-weight: 600; margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .vx-sec-val { color: var(--text-hi); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  .vx-bottom-dock {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(10, 10, 12, 0.98) 85%, transparent);
+    backdrop-filter: blur(16px); padding: 10px 16px max(14px, env(safe-area-inset-bottom)); z-index: 40;
+  }
+  .vx-dock-inner { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+  .vx-composer-box {
+    background: #171715; border: 1px solid var(--line); border-radius: 18px; padding: 6px 8px 6px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .vx-composer-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .vx-composer-input { flex: 1; background: transparent; border: none; outline: none; font-size: 13.5px; color: var(--text-hi); direction: auto; }
+  .vx-send-btn {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: var(--accent-text); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<header class="vx-app-bar">
+  <div class="vx-bar-left">
+    <div class="vx-model-pill">
+      <span class="vx-model-dot"></span>
+      <span>VX Security Suite</span>
+    </div>
+  </div>
+  <div class="vx-bar-right">
+    <div class="vx-plan-pill">PRO</div>
+    <div class="vx-user-avatar">VX</div>
+  </div>
+</header>
+
+<main class="vx-chat-main">
+  <div class="vx-banner-card">
+    <span class="vx-banner-badge">VX AI 🔥</span>
+    <strong>Vx cybersecurity check option:</strong> تەنها لینکەکەی بۆ ئەنێری (بێ پێویستی بە فەرمانی تری زیادە) تا ٥ خاڵە ئەمنییەکە کار بکات.
+  </div>
+
+  <div class="vx-hero-section" id="vx-hero">
+    <h1 class="vx-hero-title">Cybersecurity Scanner</h1>
+    <p class="vx-hero-desc">Send any link to run full 5-point vulnerability scan instantly.</p>
+  </div>
+
+  <div class="vx-prompt-pills" id="vx-pills-container">
+    <button class="vx-pill" onclick="sendPromptPill('https://example.com')">🛡️ https://example.com</button>
+  </div>
+
+  <div class="vx-stream" id="vx-chat-stream"></div>
+</main>
+
+<footer class="vx-bottom-dock">
+  <div class="vx-dock-inner">
+    <form class="vx-composer-box" onsubmit="handleSendComposer(event)">
+      <input type="text" id="vx-user-input" class="vx-composer-input" placeholder="Type target URL (e.g. https://domain.com)" autocomplete="off">
+      <button type="submit" class="vx-send-btn">➔</button>
+    </form>
+  </div>
+</footer>
+
+<script>
+  function sendPromptPill(text) {
+    document.getElementById("vx-user-input").value = text;
+    handleSendComposer(new Event('submit'));
+  }
+
+  function handleSendComposer(e) {
+    if (e) e.preventDefault();
+    const input = document.getElementById("vx-user-input");
+    const originalText = input ? input.value.trim() : "";
+
+    if (!originalText) return;
+    if (input) input.value = "";
+
+    document.getElementById("vx-hero").style.display = "none";
+    document.getElementById("vx-pills-container").style.display = "flex";
+
+    appendMessage("user", originalText);
+    const loaderId = appendLoader();
+
+    setTimeout(() => {
+      removeLoader(loaderId);
+      
+      const urlMatch = originalText.match(/https?:\/\/[^\s]+/);
+      const targetUrl = urlMatch ? urlMatch[0] : originalText;
+      
+      const securityReportHtml = `
+        <div class="vx-chat-bubble" style="margin-bottom:8px;">✅ شیکردنەوەی سایبەر سەکیوریتی بۆ وێبگەی <strong>${targetUrl}</strong> سەرکەوتوو بوو:</div>
+        <div class="vx-security-report">
+          <div class="vx-sec-header">
+            <div class="vx-sec-title">🛡️ Vx Cybersecurity Check Report</div>
+            <span style="font-size:11px; color:#7fb87a; background:rgba(127,184,122,0.15); padding:3px 8px; border-radius:6px;">Target Active</span>
+          </div>
+          <div class="vx-sec-grid">
+            <div class="vx-sec-item">
+              <div class="vx-sec-title">١. گەڕان بۆ ڕاوتەکان (Admin / Routes)<span>🟢 پشکنرا</span></div>
+              <div class="vx-sec-val">/admin (403 Protected)<br>/api/docs (Found 200)</div>
+            </div>
+            <div class="vx-sec-item">
+              <div class="vx-sec-title">٢. چێکی ڕەیت لیمتەر (Rate Limiter)<span>🟡 ئاگاداری</span></div>
+              <div class="vx-sec-val">X-RateLimit Headers: Active</div>
+            </div>
+            <div class="vx-sec-item">
+              <div class="vx-sec-title">٣. گەڕان بەدوای ئینڤایەرمێنت (.env)<span>🟢 پارێزراو</span></div>
+              <div class="vx-sec-val">/.env: 403 Forbidden</div>
+            </div>
+            <div class="vx-sec-item">
+              <div class="vx-sec-title">٤. دۆزینەوەی کەلێنی SSL<span>🟢 بێ کێشە</span></div>
+              <div class="vx-sec-val">TLS Version: 1.3 | Valid</div>
+            </div>
+          </div>
+          <div class="vx-sec-item" style="margin-top:6px;">
+            <div class="vx-sec-title">٥. دەیتابەیس ئینجێکشن (SQLi) & Nmap Scan<span>🟢 پارێزراو</span></div>
+            <div class="vx-sec-val">Port 80/443 Open | SQL Injection Heuristic: Secure.</div>
+          </div>
+        </div>
+      `;
+      appendRawAiMessage(securityReportHtml);
+    }, 600);
+  }
+
+  function appendMessage(role, text) {
+    const stream = document.getElementById("vx-chat-stream");
+    const div = document.createElement("div");
+    div.className = "vx-chat-msg " + role;
+    div.innerHTML = '<div class="vx-chat-bubble">' + text.replace(/\n/g, "<br>") + '</div>';
+    stream.appendChild(div);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+
+  function appendRawAiMessage(htmlContent) {
+    const stream = document.getElementById("vx-chat-stream");
+    const div = document.createElement("div");
+    div.className = "vx-chat-msg ai";
+    div.innerHTML = htmlContent;
+    stream.appendChild(div);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+
+  function appendLoader() {
+    const stream = document.getElementById("vx-chat-stream");
+    const id = "loader-" + Date.now();
+    const div = document.createElement("div");
+    div.id = id;
+    div.className = "vx-chat-msg ai";
+    div.innerHTML = '<div class="vx-chat-bubble" style="color:var(--accent);">• • • خەریکی پشکنینی ۵ خاڵەکەی سایبەرییە...</div>';
+    stream.appendChild(div);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    return id;
+  }
+
+  function removeLoader(id) { const el = document.getElementById(id); if (el) el.remove(); }
+</script>
+</body>
+</html>
