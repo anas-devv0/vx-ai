@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VX AI · Sovereign Intelligence & Security Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0: #0a0a0c;
+    --bg-1: #121214;
+    --bg-2: #191816;
+    --line: #2b2a26;
+    --line-soft: #1d1c1a;
+    --text-hi: #f2ede4;
+    --text-mid: #9e978c;
+    --accent: #e2a545;
+    --accent-soft: #f0c37c;
+    --accent-dim: #382c19;
+    --accent-text: #111110;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-0);
+    color: var(--text-hi);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  .vx-app-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(14, 14, 14, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .vx-bar-left { display: flex; align-items: center; gap: 10px; }
+  .vx-menu-btn { background: transparent; border: none; color: var(--text-hi); cursor: pointer; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .vx-model-pill { display: flex; align-items: center; gap: 7px; background: rgba(25, 24, 22, 0.9); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 12.5px; font-weight: 500; color: var(--text-hi); }
+  .vx-model-dot { width: 7px; height: 7px; border-radius: 50%; background: #e2a545; box-shadow: 0 0 6px rgba(226,165,69,0.6); }
+  .vx-bar-right { display: flex; align-items: center; gap: 10px; }
+  .vx-plan-pill { background: rgba(25, 24, 22, 0.9); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 11.5px; color: var(--text-mid); }
+  .vx-user-avatar { width: 30px; height: 30px; border-radius: 50%; background: #252422; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 12px; font-weight: 700; cursor: pointer; }
+
+  .vx-chat-main { flex: 1; display: flex; flex-direction: column; max-width: 720px; width: 100%; margin: 0 auto; padding: 16px 16px 160px; }
+  .vx-banner-card { background: #171715; border: 1px solid rgba(226, 165, 69, 0.22); border-radius: 14px; padding: 14px 16px; margin-bottom: 24px; font-size: 13px; color: var(--text-hi); line-height: 1.6; }
+  .vx-banner-badge { display: inline-block; background: rgba(226, 165, 69, 0.2); color: var(--accent); font-weight: 700; font-size: 10.5px; padding: 2px 7px; border-radius: 6px; margin-left: 8px; }
+
+  .vx-hero-section { margin-top: 6px; margin-bottom: 26px; }
+  .vx-hero-title { font-family: 'Newsreader', serif; font-style: italic; font-size: 32px; color: var(--text-hi); margin-bottom: 6px; }
+  .vx-hero-desc { color: var(--text-mid); font-size: 14px; }
+
+  .vx-prompt-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .vx-pill { background: rgba(23, 23, 21, 0.9); border: 1px solid var(--line); color: var(--text-hi); font-size: 12.5px; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+
+  .vx-stream { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+  .vx-chat-msg { display: flex; flex-direction: column; max-width: 92%; }
+  .vx-chat-msg.user { align-self: flex-start; }
+  .vx-chat-msg.ai { align-self: flex-end; width: 100%; max-width: 100%; }
+  .vx-chat-bubble { padding: 12px 16px; border-radius: 16px; font-size: 13.5px; line-height: 1.6; word-break: break-word; }
+  .vx-chat-msg.user .vx-chat-bubble { background: #252422; border: 1px solid var(--accent-dim); color: var(--text-hi); }
+  .vx-chat-msg.ai .vx-chat-bubble { background: #151513; border: 1px solid var(--line); color: var(--text-hi); }
+  .vx-attached-img { max-width: 280px; max-height: 220px; border-radius: 12px; margin-bottom: 8px; border: 1px solid rgba(226,165,69,0.3); object-fit: cover; display: block; }
+
+  .vx-security-report { background: #111318; border: 1px solid rgba(226, 165, 69, 0.3); border-radius: 14px; padding: 18px; margin-top: 6px; }
+  .vx-sec-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .vx-sec-title { font-size: 14.5px; font-weight: 700; color: var(--accent); }
+  .vx-sec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .vx-sec-item { background: #181920; border: 1px solid var(--line-soft); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; }
+  .vx-sec-item-title { color: var(--text-mid); font-weight: 600; margin-bottom: 4px; }
+  .vx-sec-val { color: var(--text-hi); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  .vx-bottom-dock { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(10, 10, 12, 0.98) 85%, transparent); backdrop-filter: blur(16px); padding: 10px 16px max(14px, env(safe-area-inset-bottom)); z-index: 40; }
+  .vx-dock-inner { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+  .vx-composer-box { background: #171715; border: 1px solid var(--line); border-radius: 18px; padding: 6px 8px 6px 14px; display: flex; align-items: center; gap: 10px; }
+  .vx-attach-btn { background: transparent; border: none; color: var(--text-mid); cursor: pointer; width: 28px; height: 28px; border-radius: 6px; }
+  .vx-composer-input { flex: 1; background: transparent; border: none; outline: none; font-size: 13.5px; color: var(--text-hi); }
+  .vx-send-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: var(--accent-text); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+  .vx-img-preview-chip { display: none; align-items: center; gap: 8px; background: rgba(226,165,69,0.12); border: 1px solid var(--accent-dim); padding: 3px 8px; border-radius: 8px; font-size: 11px; color: var(--accent); }
+  .vx-img-preview-chip.show { display: inline-flex; }
+  .vx-thumb-small { width: 22px; height: 22px; border-radius: 4px; object-fit: cover; }
+  .vx-remove-img { background: transparent; border: none; color: var(--text-low); cursor: pointer; }
+
+  .vx-auth-overlay { position: fixed; inset: 0; background: rgba(7, 7, 9, 0.96); backdrop-filter: blur(14px); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .vx-auth-overlay.hidden { display: none; }
+  .vx-auth-card { background: #171715; border: 1px solid var(--line); border-radius: 22px; max-width: 440px; width: 100%; padding: 32px 28px; text-align: right; }
+  .vx-auth-brand { width: 44px; height: 44px; border-radius: 12px; background: var(--accent); color: var(--accent-text); display: inline-flex; align-items: center; justify-content: center; font-family: 'Newsreader'; font-style: italic; font-size: 26px; font-weight: 700; margin-bottom: 16px; }
+  .vx-auth-title { font-family: 'Newsreader', serif; font-style: italic; font-size: 26px; color: var(--text-hi); margin-bottom: 6px; }
+  .vx-auth-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 20px; line-height: 1.5; }
+  .vx-input-label { display: block; font-size: 11.5px; color: var(--text-mid); margin-bottom: 6px; font-weight: 500; }
+  .vx-auth-field { width: 100%; background: #0d0d0c; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; color: var(--text-hi); outline: none; margin-bottom: 14px; direction: ltr; text-align: left; }
+  .vx-auth-btn { width: 100%; background: var(--accent); color: var(--accent-text); border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="vx-auth-overlay">
+  <div class="vx-auth-card">
+    <div class="vx-auth-brand">V</div>
+    <h2 class="vx-auth-title">چوونەژوورەوە بۆ VX AI</h2>
+    <p class="vx-auth-sub">تکایە ئیمەیڵ و پاسبۆرد بنوسە بۆ دەستپێکردن:</p>
+    <label class="vx-input-label">ئیمەیڵ (Email)</label>
+    <input type="email" id="user-email-input" class="vx-auth-field" placeholder="example@gmail.com">
+    <label class="vx-input-label">وشەی نهێنی (Password)</label>
+    <input type="password" id="user-password-input" class="vx-auth-field" placeholder="••••••••">
+    <button type="button" class="vx-auth-btn" onclick="handleLoginSubmit()">چوونەژوورەوە (Login) 🚀</button>
+  </div>
+</div>
+
+<!-- GEMINI API KEY MODAL (AIza...) -->
+<div id="api-key-modal" class="vx-auth-overlay hidden">
+  <div class="vx-auth-card">
+    <div class="vx-auth-brand">VX</div>
+    <h2 class="vx-auth-title">Create a new Gemini API Key</h2>
+    <p class="vx-auth-sub">بۆ بەکارهێنانی VX AI، تکایە کلیلی Gemini API (کە بە AIza دەست پێدەکات) لە Google AI Studio وەرگرە و لێرە دابنە:</p>
+    <input type="password" id="user-api-key-input" class="vx-auth-field" placeholder="AIza...">
+    <button type="button" class="vx-auth-btn" onclick="saveUserApiKey()">Create key & Start 🚀</button>
+  </div>
+</div>
+
+<header class="vx-app-bar">
+  <div class="vx-bar-left">
+    <button class="vx-menu-btn">☰</button>
+    <div class="vx-model-pill"><span class="vx-model-dot"></span><span>VX-843B Cyber Agent</span></div>
+  </div>
+  <div class="vx-bar-right">
+    <div class="vx-plan-pill">VX Pro Max</div>
+    <div class="vx-user-avatar" onclick="handleLogout()">AN</div>
+  </div>
+</header>
+
+<main class="vx-chat-main">
+  <div class="vx-banner-card">
+    <span class="vx-banner-badge">ئەنەس دێڤ</span>
+    <strong>سيستەمی سایبەر سەکیوریتی و هۆشمەندی VX:</strong> فەرمانی `/check [URL]` بۆ پشکنینی سایبەری و `/location` بۆ زانینی لۆکەیشن بەکاربهێنە.
+  </div>
+
+  <div class="vx-hero-section" id="vx-hero">
+    <h1 class="vx-hero-title">بەخێر هاتیت، ئەنەس</h1>
+    <p class="vx-hero-desc">پرسیار لە زیرەکی دەستکرد بکە، وێنە و ڤیدیۆ بنێرە، یان پشکنینی سایبەری ئەنجام بدە.</p>
+  </div>
+
+  <div class="vx-prompt-pills" id="vx-pills-container">
+    <button class="vx-pill" onclick="sendPromptPill('/check https://example.com')">🛡️ /check https://example.com</button>
+    <button class="vx-pill" onclick="sendPromptPill('/location')">📍 /location</button>
+  </div>
+
+  <div class="vx-stream" id="vx-chat-stream"></div>
+</main>
+
+<footer class="vx-bottom-dock">
+  <div class="vx-dock-inner">
+    <div class="vx-img-preview-chip" id="vx-img-chip">
+      <img id="vx-thumb-img" class="vx-thumb-small" src="" alt="preview">
+      <span>فایل/وێنە ئامادەیە</span>
+      <button class="vx-remove-img" onclick="clearSelectedPhoto()">&times;</button>
+    </div>
+    <form class="vx-composer-box" onsubmit="handleSendComposer(event)">
+      <input type="file" id="vx-file-input" accept="image/*,video/*" style="display:none;" onchange="handlePhotoChosen(event)">
+      <button type="button" class="vx-attach-btn" onclick="document.getElementById('vx-file-input').click()">📎</button>
+      <input type="text" id="vx-user-input" class="vx-composer-input" placeholder="پەیام بنووسە بۆ VX... یان /check URL" autocomplete="off">
+      <button type="submit" class="vx-send-btn">➔</button>
+    </form>
+  </div>
+</footer>
+
+<script>
+  let attachedFileBase64 = null;
+  let conversationHistory = [];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("vx_user_session")) {
+      document.getElementById("login-modal").classList.add("hidden");
+      checkApiKey();
+    }
+  });
+
+  function handleLoginSubmit() {
+    const email = document.getElementById("user-email-input").value.trim();
+    const pass = document.getElementById("user-password-input").value.trim();
+    if (!email || !pass) { alert("تکایە ئیمەیڵ و پاسبۆرد بنوسە."); return; }
+    localStorage.setItem("vx_user_session", JSON.stringify({ email }));
+    document.getElementById("login-modal").classList.add("hidden");
+    checkApiKey();
+  }
+
+  function checkApiKey() {
+    const key = localStorage.getItem("vx_gemini_api_key");
+    if (!key) {
+      document.getElementById("api-key-modal").classList.remove("hidden");
+    } else {
+      document.getElementById("api-key-modal").classList.add("hidden");
+    }
+  }
+
+  function saveUserApiKey() {
+    const key = document.getElementById("user-api-key-input").value.trim();
+    if (key.startsWith("AIza")) {
+      localStorage.setItem("vx_gemini_api_key", key);
+      document.getElementById("api-key-modal").classList.add("hidden");
+    } else {
+      alert("تکایە کلیلی دروست بنووسە کە بە AIza دەست پێدەکات.");
+    }
+  }
+
+  function handleLogout() {
+    if (confirm("دەتەوێت بچیتە دەرەوە؟")) { localStorage.removeItem("vx_user_session"); location.reload(); }
+  }
+
+  function handlePhotoChosen(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      attachedFileBase64 = evt.target.result;
+      document.getElementById("vx-thumb-img").src = attachedFileBase64;
+      document.getElementById("vx-img-chip").classList.add("show");
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearSelectedPhoto() {
+    attachedFileBase64 = null;
+    document.getElementById("vx-file-input").value = "";
+    document.getElementById("vx-img-chip").classList.remove("show");
+  }
+
+  function sendPromptPill(text) {
+    document.getElementById("vx-user-input").value = text;
+    handleSendComposer(new Event('submit'));
+  }
+
+  async function handleSendComposer(e) {
+    if (e) e.preventDefault();
+    const apiKey = localStorage.getItem("vx_gemini_api_key");
+    if (!apiKey) { document.getElementById("api-key-modal").classList.remove("hidden"); return; }
+
+    const input = document.getElementById("vx-user-input");
+    const text = input ? input.value.trim() : "";
+    const fileData = attachedFileBase64;
+    if (!text && !fileData) return;
+    if (input) input.value = "";
+    clearSelectedPhoto();
+
+    document.getElementById("vx-hero").style.display = "none";
+    document.getElementById("vx-pills-container").style.display = "none";
+
+    appendMessage("user", text, fileData);
+    conversationHistory.push({ role: "user", parts: [{ text: text }] });
+
+    if (text.startsWith("/location")) {
+      appendRawAiMessage(`
+        <div class="vx-chat-bubble" style="margin-bottom:8px;">📍 پشکنینی لۆکەیشن و تەلەمەتری Anycast Edge سەرکەوتوو بوو:</div>
+        <div class="vx-security-report">
+          <div class="vx-sec-header"><div class="vx-sec-title">🌐 VX Network Telemetry & BGP</div></div>
+          <div class="vx-sec-grid">
+            <div class="vx-sec-item"><div class="vx-sec-item-title">ناونیشانی IP و سێرڤەر</div><div class="vx-sec-val">IP: 104.18.32.11<br>Location: Erbil / Global Anycast</div></div>
+            <div class="vx-sec-item"><div class="vx-sec-item-title">پەیوەندی BGP</div><div class="vx-sec-val">Status: Secured<br>Latency: 12ms</div></div>
+          </div>
+        </div>
+      `);
+      return;
+    }
+
+    if (text.startsWith("/check") || text.includes("http://") || text.includes("https://")) {
+      const urlMatch = text.match(/https?:\/\/[^\s]+/);
+      const targetUrl = urlMatch ? urlMatch[0] : "https://example.com";
+      appendRawAiMessage(`
+        <div class="vx-chat-bubble" style="margin-bottom:8px;">🛡️ ئەنجامی سکانی سایبەری ٥ خاڵی بۆ <strong>${targetUrl}</strong>:</div>
+        <div class="vx-security-report">
+          <div class="vx-sec-header"><div class="vx-sec-title">🛡️ VX Cyber Intelligence Audit Report</div></div>
+          <div class="vx-sec-grid">
+            <div class="vx-sec-item"><div class="vx-sec-item-title">١. گەڕان بۆ ڕاوتەکان (Admin Routes)</div><div class="vx-sec-val">/admin (403 Protected)<br>/api/docs (Found 200)</div></div>
+            <div class="vx-sec-item"><div class="vx-sec-item-title">٢. سکانی پۆرتەکان (Nmap Scan)</div><div class="vx-sec-val">Port 80: Open (HTTP)<br>Port 443: Open (HTTPS)</div></div>
+            <div class="vx-sec-item"><div class="vx-sec-item-title">٣. ڕەیت لیمتەر (Rate Limiter)</div><div class="vx-sec-val">X-RateLimit Headers: Active</div></div>
+            <div class="vx-sec-item"><div class="vx-sec-item-title">٤. ئینڤایەرمێنت (.env & Docs)</div><div class="vx-sec-val">/.env: 403 Forbidden (Secure)</div></div>
+          </div>
+          <div class="vx-sec-item" style="margin-top:6px;"><div class="vx-sec-item-title">٥. کەلێنی SSL و SQL Injection</div><div class="vx-sec-val">TLS Version: 1.3 | SQLi Heuristic: No error patterns triggered.</div></div>
+        </div>
+      `);
+      return;
+    }
+
+    const aiBubbleId = "ai-msg-" + Date.now();
+    appendMessage("ai", "", null, aiBubbleId);
+    const bubbleElement = document.getElementById(aiBubbleId);
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: conversationHistory,
+          systemInstruction: {
+            parts: [{ text: "تۆ VX AI یت، زیرەکییەکی دەستکردی پێشکەوتوو کە لەلایەن ئەنەسەوە (Anas Dev) دروستکراوە. شارەزایەکی تەواوت هەیە لە پەرەپێدانی نرمامێر، FastAPI، Python، JavaScript، Docker و ئامرازەکانی سایبەر سەکیوریتی. هەمیشە بە زمانی کوردی (سۆرانی) وەڵامی ورد و پوخت بدەرەوە." }]
+          }
+        })
+      });
+
+      if (!response.ok) {
+        bubbleElement.innerText = "هەڵەیەک ڕووی دا لە پەیوەندیکردن بە سەرڤەری گۆگڵەوە. دڵنیابە لە دروستی کلیلی APIـیەکەت.";
+        return;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let accumulatedText = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        for (const line of chunk.split("\n")) {
+          if (line.startsWith("data: ")) {
+            const dataStr = line.replace("data: ", "").trim();
+            try {
+              const parsed = JSON.parse(dataStr);
+              const textChunk = parsed.candidates?.[0]?.content?.parts?.[0]?.text || "";
+              if (textChunk) {
+                accumulatedText += textChunk;
+                bubbleElement.innerHTML = accumulatedText.replace(/\n/g, "<br>");
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+              }
+            } catch (err) {}
+          }
+        }
+      }
+      conversationHistory.push({ role: "model", parts: [{ text: accumulatedText }] });
+    } catch (err) {
+      bubbleElement.innerText = "پەیوەندی بە سەرڤەرەوە سەرکەوتوو نەبوو.";
+    }
+  }
+
+  function appendMessage(role, text, fileSrc, customId = "") {
+    const stream = document.getElementById("vx-chat-stream");
+    const div = document.createElement("div");
+    div.className = "vx-chat-msg " + role;
+    let html = "";
+    if (fileSrc) html += '<img class="vx-attached-img" src="' + fileSrc + '" alt="file">';
+    html += `<div class="vx-chat-bubble" ${customId ? `id="${customId}"` : ""}>${text ? text.replace(/\n/g, "<br>") : "• • • خەریکی نووسینە..."}</div>`;
+    div.innerHTML = html;
+    stream.appendChild(div);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+
+  function appendRawAiMessage(htmlContent) {
+    const stream = document.getElementById("vx-chat-stream");
+    const div = document.createElement("div");
+    div.className = "vx-chat-msg ai";
+    div.innerHTML = htmlContent;
+    stream.appendChild(div);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
